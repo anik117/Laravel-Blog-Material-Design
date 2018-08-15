@@ -47,6 +47,7 @@
                                     <td>{{ $tag->created_at }}</td>
                                     <td>{{ $tag->updated_at }}</td>
                                     <td class="text-right">
+                                        <a href="{{ route('admin.tag.show', $tag->id) }}" class="btn btn-simple btn-info btn-fab btn-icon"><i class="material-icons">visibility</i></a>
                                         <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-simple btn-primary btn-fab btn-icon edit"><i class="material-icons">edit</i></a>
                                         <form class="confirm_delete" action="{{ route('admin.tag.destroy',$tag->id) }}" method="POST" style="display: inline-block">
                                             @csrf

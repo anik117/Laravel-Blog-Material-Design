@@ -24,7 +24,7 @@
             <i class="material-icons">library_books</i>
         </div>
         <div class="card-content">
-            <h4 class="card-title"><strong>Post Details</strong></h4>
+            <h4 class="card-title">Post Details</h4>
         </div>
     </div>
     <div class="row">
@@ -46,9 +46,8 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-content">
-                    <div class="alert alert-rose">
-                        <h4 class="card-title">Categories</h4>
-                    </div>
+                    <h4 class="card-title">Categories</h4>
+                    <hr>
                     <div>
                         @foreach($post->categories as $category)
                             <span class="tag label label-rose">{{ $category->name }}</span>
@@ -59,9 +58,8 @@
 
             <div class="card">
                 <div class="card-content">
-                    <div class="alert alert-primary">
-                        <h4 class="card-title">Tags</h4>
-                    </div>
+                    <h4 class="card-title">Tags</h4>
+                    <hr>
                     <div>
                         @foreach($post->tags as $tag)
                             <span class="tag label label-primary">{{ $tag->name }}</span>
@@ -72,9 +70,8 @@
 
             <div class="card">
                 <div class="card-content">
-                    <div class="alert alert-danger">
-                        <h4 class="card-title">Featured Image</h4>
-                    </div>
+                    <h4 class="card-title">Featured Image</h4>
+                    <hr>
                     <div>
                         <img class="img-responsive thumbnail" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="">
                     </div>
