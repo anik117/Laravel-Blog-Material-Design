@@ -48,7 +48,7 @@
                                     <td>{{ $tag->updated_at }}</td>
                                     <td class="text-right">
                                         <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-simple btn-primary btn-fab btn-icon edit"><i class="material-icons">edit</i></a>
-                                        <form class="delete_me" id="confirm_delete" action="{{ route('admin.tag.destroy',$tag->id) }}" method="POST" style="display: inline-block">
+                                        <form class="confirm_delete" action="{{ route('admin.tag.destroy',$tag->id) }}" method="POST" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-simple btn-danger btn-fab btn-icon" type="submit">
@@ -94,7 +94,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $( "#confirm_delete" ).submit(function( event ) {
+            $( ".confirm_delete" ).submit(function( event ) {
                 event.preventDefault();
                 swal({
                     title: 'Are you sure?',
@@ -110,7 +110,7 @@
                     reverseButtons: true,
                     buttonsStyling: false
                 }).then(function() {
-                    $("#confirm_delete").off("submit").submit();
+                    $(".confirm_delete").off("submit").submit();
                         swal(
                             'Deleted!',
                             'Your file has been deleted.',
