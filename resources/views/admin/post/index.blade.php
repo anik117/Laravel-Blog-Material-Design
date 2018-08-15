@@ -68,6 +68,7 @@
                                     <td>{{ $post->updated_at }}</td>
                                     <td>{{ $post->view_count }}</td>
                                     <td class="text-right">
+                                        <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-simple btn-info btn-fab btn-icon"><i class="material-icons">visibility</i></a>
                                         <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-simple btn-primary btn-fab btn-icon edit"><i class="material-icons">edit</i></a>
                                         <form class="delete_me" id="confirm_delete" action="{{ route('admin.post.destroy', $post->id) }}" method="POST" style="display: inline-block">
                                             @csrf
