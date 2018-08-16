@@ -49,7 +49,7 @@
                                     <td class="text-right">
                                         <a href="{{ route('admin.tag.show', $tag->id) }}" class="btn btn-simple btn-info btn-fab btn-icon"><i class="material-icons">visibility</i></a>
                                         <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-simple btn-primary btn-fab btn-icon edit"><i class="material-icons">edit</i></a>
-                                        <form class="confirm_delete" action="{{ route('admin.tag.destroy',$tag->id) }}" method="POST" style="display: inline-block">
+                                        <form id="confirm_delete-{{$tag->id}}" onsubmit="deleteTag({{$tag->id}})" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-simple btn-danger btn-fab btn-icon" type="submit">
@@ -90,12 +90,10 @@
 
         });
 
-
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $( ".confirm_delete" ).submit(function( event ) {
+        function deleteTag (id) {
                 event.preventDefault();
                 swal({
                     title: 'Are you sure?',
@@ -111,12 +109,12 @@
                     reverseButtons: true,
                     buttonsStyling: false
                 }).then(function() {
-                    $(".confirm_delete").off("submit").submit();
-                        swal(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        );
+                    $("#confirm_delete-"+id).off("submit").submit();
+                    swal(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    );
                 }, function(dismiss) {
                     // dismiss can be 'cancel', 'overlay',
                     // 'close', and 'timer'
@@ -127,8 +125,8 @@
                             'error'
                         );
                     }
-                })
-            });
-        });
+                });
+        }
     </script>
+
 @endpush

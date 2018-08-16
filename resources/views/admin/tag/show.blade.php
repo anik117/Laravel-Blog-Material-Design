@@ -26,11 +26,15 @@
                     <hr>
                     <p class="text-muted medium">Relates posts with this tag</p>
                     <div>
-                        <ol>
-                        @foreach($tag->posts as $post)
-                            <li><a href="{{ route('admin.post.show', $post->id) }}">{{ $post->title }}</a></li>
-                        @endforeach
-                        </ol>
+                        @if(count($tag->posts) > 0)
+                            <ol>
+                                @foreach($tag->posts as $post)
+                                    <li><a href="{{ route('admin.post.show', $post->id) }}">{{ $post->title }}</a></li>
+                                @endforeach
+                            </ol>
+                        @else
+                            <p class="small text-muted">Nothing found</p>
+                        @endif
                     </div>
                 </div>
         </div>
