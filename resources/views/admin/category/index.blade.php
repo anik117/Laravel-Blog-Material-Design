@@ -47,8 +47,9 @@
                                     <td>{{ $category->created_at }}</td>
                                     <td>{{ $category->updated_at }}</td>
                                     <td class="text-right">
+                                        <a href="{{ route('admin.category.show', $category->id) }}" class="btn btn-simple btn-info btn-fab btn-icon"><i class="material-icons">visibility</i></a>
                                         <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-simple btn-primary btn-fab btn-icon edit"><i class="material-icons">edit</i></a>
-                                        <form class="confirm_delete" action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: inline-block">
+                                        <form id="confirm_delete-{{$category->id}}" onsubmit="deleteCategory({{$category->id}})" action="{{ route('admin.category.destroy', $category->id) }}" method="POST" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-simple btn-danger btn-fab btn-icon" type="submit">
@@ -88,46 +89,42 @@
             $('.card .material-datatables label').addClass('form-group');
 
         });
-
-
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $( ".confirm_delete" ).submit(function( event ) {
-                event.preventDefault();
-                swal({
-                    title: 'Are you sure?',
-                    text: "Please click confirm to delete this item",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                    reverseButtons: true,
-                    buttonsStyling: false
-                }).then(function() {
-                    $(".confirm_delete").off("submit").submit();
-                        swal(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        );
-                }, function(dismiss) {
-                    // dismiss can be 'cancel', 'overlay',
-                    // 'close', and 'timer'
-                    if (dismiss === 'cancel') {
-                        swal(
-                            'Cancelled',
-                            'Your data is safe :)',
-                            'error'
-                        );
-                    }
-                })
+        function deleteCategory (id) {
+            event.preventDefault();
+            swal({
+                title: 'Are you sure?',
+                text: "Please click confirm to delete this item",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                reverseButtons: true,
+                buttonsStyling: false
+            }).then(function() {
+                $("#confirm_delete-"+id).off("submit").submit();
+                swal(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                );
+            }, function(dismiss) {
+                // dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+                if (dismiss === 'cancel') {
+                    swal(
+                        'Cancelled',
+                        'Your data is safe :)',
+                        'error'
+                    );
+                }
             });
-        });
+        }
     </script>
 @endpush
