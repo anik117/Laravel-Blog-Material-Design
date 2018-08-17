@@ -94,6 +94,7 @@ class PostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
+        flashy()->success('Post Created Successfully!');
         return redirect()->route('admin.post.index');
     }
 
@@ -182,6 +183,7 @@ class PostController extends Controller
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
 
+        flashy()->success('Post Updated Successfully!');
         return redirect()->route('admin.post.index');
     }
 
@@ -200,6 +202,7 @@ class PostController extends Controller
             $post->save();
         }
 
+        flashy()->success('Post Approved Successfully!');
         return redirect()->back();
     }
 
@@ -220,6 +223,7 @@ class PostController extends Controller
 
         $post->delete();
 
+        flashy()->success('Post Deleted Successfully!');
         return redirect()->back();
 
     }

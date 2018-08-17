@@ -73,6 +73,7 @@ class CategoryController extends Controller
 
         $category->save();
 
+        flashy()->success('Category Created Successfully!');
         return redirect()->route('admin.category.index');
     }
 
@@ -148,6 +149,7 @@ class CategoryController extends Controller
 
         $category->save();
 
+        flashy()->success('Category Updated Successfully!');
         return redirect()->route('admin.category.index');
     }
 
@@ -166,6 +168,8 @@ class CategoryController extends Controller
         }
 
         $category->delete();
+
+        flashy()->success('Category Deleted Successfully!');
         return redirect()->back();
     }
 }

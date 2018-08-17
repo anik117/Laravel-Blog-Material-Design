@@ -22,7 +22,8 @@
     <link href="{{ asset('assets/backend/css/font-awesome.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/backend/css/google-roboto-300-700.css') }}" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
 
     @stack('css')
 
@@ -112,10 +113,7 @@
     <!-- Material Dashboard javascript methods -->
     <script src="{{ asset('assets/backend/js/material-dashboard.js') }}"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    {{--<script src="{{ asset('assets/backend/js/demo.js') }}"></script>--}}
+    @include('flashy::message')
 
     @stack('js')
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use MercurySeries\Flashy\Flashy;
 
 class TagController extends Controller
 {
@@ -47,7 +48,7 @@ class TagController extends Controller
         $tag->slug = str_slug($request->name);
 
         $tag->save();
-
+        flashy()->success('Tag Created Successfully!');
         return redirect()->route('admin.tag.index');
     }
 
@@ -90,6 +91,7 @@ class TagController extends Controller
 
         $tag->save();
 
+        flashy()->success('Tag Updated Successfully!');
         return redirect()->route('admin.tag.index');
     }
 
@@ -102,6 +104,7 @@ class TagController extends Controller
     public function destroy($id)
     {
         Tag::find($id)->delete();
+        flashy()->success('Tag Deleted Successfully!');
         return redirect()->back();
     }
 }

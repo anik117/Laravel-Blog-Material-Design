@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use MercurySeries\Flashy\Flashy;
 
 class PostController extends Controller
 {
@@ -95,6 +96,7 @@ class PostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
+        flashy()->success('Post Created Successfully!');
         return redirect()->route('author.post.index');
     }
 
@@ -107,9 +109,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         if ($post->user_id != Auth::id()) {
+            flashy()->error('You are not authorized to access this post!');
             return redirect()->back();
         }
-
         return view('author.post.show', compact('post'));
     }
 
@@ -122,6 +124,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         if ($post->user_id != Auth::id()) {
+            flashy()->error('You are not authorized to access this post!');
             return redirect()->back();
         }
 
@@ -140,6 +143,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         if ($post->user_id != Auth::id()) {
+            flashy()->error('You are not authorized to access this post!');
             return redirect()->back();
         }
 
@@ -195,6 +199,7 @@ class PostController extends Controller
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
 
+        flashy()->success('Post Updated Successfully!');
         return redirect()->route('author.post.index');
     }
 
@@ -207,6 +212,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->user_id != Auth::id()) {
+            flashy()->error('You are not authorized to access this post!');
             return redirect()->back();
         }
 
@@ -219,6 +225,7 @@ class PostController extends Controller
 
         $post->delete();
 
+        flashy()->success('Post Deleted Successfully!');
         return redirect()->back();
     }
 }
