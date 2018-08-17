@@ -7,8 +7,9 @@
 @endpush
 
 @section('content')
-    <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('author.post.update', $post->id) }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
@@ -16,10 +17,10 @@
                         <i class="material-icons">library_books</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Create Post</h4>
+                        <h4 class="card-title">Edit Post</h4>
                         <div class="form-group">
                             <label class="control-label">Post Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter post title.." required>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}" required>
                         </div>
 
                         <div class="form-group">
@@ -32,7 +33,7 @@
                                     <span class="btn btn-rose btn-round btn-file">
                                         <span class="fileinput-new">Featured image</span>
                                         <span class="fileinput-exists">Change</span>
-                                        <input type="file" name="image" required>
+                                        <input type="file" name="image">
                                     </span>
                                     <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                 </div>
@@ -40,7 +41,7 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="status" id="publish" value="1"> Publish
+                                <input type="checkbox" name="status" id="publish" value="1" {{ $post->status == true ? 'checked' : '' }}> Publish
                             </label>
                         </div>
                     </div>
@@ -54,7 +55,12 @@
                         <div class="form-group {{ $errors->has('categories') ? 'focused error' : '' }}">
                             <select class="selectpicker" data-style="select-with-transition" data-live-search="true" multiple title="Choose Category" name="categories[]" id="category">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option
+                                        @foreach($post->categories as $postCategory)
+                                            {{ $postCategory->id == $category->id ? 'selected' : '' }}
+                                        @endforeach
+                                        value="{{ $category->id }}"> {{ $category->name }}
+                                    </option>
                                 @endforeach
 
                             </select>
@@ -62,7 +68,12 @@
                         <div class="form-group {{ $errors->has('tags') ? 'focused error' : '' }}">
                             <select class="selectpicker" data-style="select-with-transition" data-live-search="true" multiple title="Choose Tag" name="tags[]" id="tag">
                                 @foreach($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    <option
+                                        @foreach($post->tags as $postTag)
+                                        {{ $postTag->id == $tag->id ? 'selected' : '' }}
+                                        @endforeach
+                                        value="{{ $tag->id }}"> {{ $tag->name }}
+                                    </option>
                                 @endforeach
 
                             </select>
@@ -78,7 +89,7 @@
                     <div class="card-content">
                         <h4 class="card-title">Body</h4>
                         <div class="form-group">
-                            <textarea id="ta" name="body"></textarea>
+                            <textarea id="ta" name="body">{{ $post->body }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -86,7 +97,7 @@
         </div>
 
 
-        <a href="{{ route('admin.post.index') }}" class="btn btn-default btn-raised"><i class="material-icons">arrow_back</i></a>
+        <a href="{{ route('author.post.index') }}" class="btn btn-default btn-raised"><i class="material-icons">arrow_back</i></a>
         <button type="submit" class="btn btn-fill btn-rose">Submit</button>
     </form>
 @endsection

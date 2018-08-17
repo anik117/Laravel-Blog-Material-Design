@@ -49,60 +49,48 @@
             </div>
         </div>
         <ul class="nav sidenavul">
-            <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
-                <a href="{{ route('admin.dashboard') }}">
-                    <i class="material-icons">dashboard</i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
-            <li class="{{ Request::is('admin/post*') ? 'active' : '' }}">
-                <a href="{{ route('admin.post.index') }}">
-                    <i class="material-icons">library_books</i>
-                    <p>Posts</p>
-                </a>
-            </li>
-            <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
-                <a href="{{ route('admin.tag.index') }}">
-                    <i class="material-icons">label</i>
-                    <p>Tags</p>
-                </a>
-            </li>
-            <li class="{{ Request::is('admin/category*') ? 'active' : '' }}">
-                <a href="{{ route('admin.category.index') }}">
-                    <i class="material-icons">apps</i>
-                    <p>Categories</p>
-                </a>
-            </li>
-            <li>
-                <a data-toggle="collapse" href="#pagesExamples">
-                    <i class="material-icons">image</i>
-                    <p>Pages
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="pagesExamples">
-                    <ul class="nav">
-                        <li>
-                            <a href="pages/pricing.html">Pricing</a>
-                        </li>
-                        <li>
-                            <a href="pages/timeline.html">Timeline</a>
-                        </li>
-                        <li>
-                            <a href="pages/login.html">Login Page</a>
-                        </li>
-                        <li>
-                            <a href="pages/register.html">Register Page</a>
-                        </li>
-                        <li>
-                            <a href="pages/lock.html">Lock Screen Page</a>
-                        </li>
-                        <li>
-                            <a href="pages/user.html">User Profile</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+            @if(Request::is('admin*'))
+                <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="{{ Request::is('admin/post*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.post.index') }}">
+                        <i class="material-icons">library_books</i>
+                        <p>Posts</p>
+                    </a>
+                </li>
+                <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.tag.index') }}">
+                        <i class="material-icons">label</i>
+                        <p>Tags</p>
+                    </a>
+                </li>
+                <li class="{{ Request::is('admin/category*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.category.index') }}">
+                        <i class="material-icons">apps</i>
+                        <p>Categories</p>
+                    </a>
+                </li>
+            @endif
+
+            @if(Request::is('author*'))
+                <li class="{{ Request::is('author/dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('author.dashboard') }}">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="{{ Request::is('author/post*') ? 'active' : '' }}">
+                    <a href="{{ route('author.post.index') }}">
+                        <i class="material-icons">library_books</i>
+                        <p>Posts</p>
+                    </a>
+                </li>
+            @endif
 
         </ul>
     </div>

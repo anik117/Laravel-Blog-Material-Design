@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-    <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('author.post.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-8">
@@ -86,7 +86,7 @@
         </div>
 
 
-        <a href="{{ route('admin.post.index') }}" class="btn btn-default btn-raised"><i class="material-icons">arrow_back</i></a>
+        <a href="{{ route('author.post.index') }}" class="btn btn-default btn-raised"><i class="material-icons">arrow_back</i></a>
         <button type="submit" class="btn btn-fill btn-rose">Submit</button>
     </form>
 @endsection
