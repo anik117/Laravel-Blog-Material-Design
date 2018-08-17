@@ -54,7 +54,7 @@
                                         @if($post->is_approved == true)
                                             <span class="label label-success">Approved</span>
                                         @else
-                                            <span class="label label-rose">Not Approved</span>
+                                            <span class="label label-rose">Pending</span>
                                         @endif
                                     </td>
                                     <td>

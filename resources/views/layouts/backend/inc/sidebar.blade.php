@@ -62,6 +62,12 @@
                         <p>Posts</p>
                     </a>
                 </li>
+                <li class="{{ Request::is('admin/pending/post') ? 'active' : '' }}">
+                    <a href="{{ route('admin.post.pending') }}">
+                        <i class="material-icons">report</i>
+                        <p>Pending Posts</p>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
                     <a href="{{ route('admin.tag.index') }}">
                         <i class="material-icons">label</i>

@@ -68,6 +68,14 @@
                                     <td>{{ $post->updated_at }}</td>
                                     <td>{{ $post->view_count }}</td>
                                     <td class="text-right">
+
+                                        <form id="confirm_approve-{{$post->id}}" onsubmit="approvePost({{$post->id}})" action="{{ route('admin.post.approve', $post->id) }}" method="POST" style="display: inline-block">
+                                            @csrf
+                                            @method('PUT')
+                                            <button class="btn btn-simple btn-danger btn-fab btn-icon" type="submit">
+                                                <i class="material-icons">done</i>
+                                            </button>
+                                        </form>
                                         <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-simple btn-info btn-fab btn-icon"><i class="material-icons">visibility</i></a>
                                         <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-simple btn-primary btn-fab btn-icon edit"><i class="material-icons">edit</i></a>
                                         <form id="confirm_delete-{{$post->id}}" onsubmit="deletePost({{$post->id}})" action="{{ route('admin.post.destroy', $post->id) }}" method="POST" style="display: inline-block">
@@ -144,6 +152,42 @@
                         'Cancelled',
                         'Your data is safe :)',
                         'error'
+                    );
+                }
+            });
+        }
+
+        // approve post
+        function approvePost (id) {
+            event.preventDefault();
+            swal({
+                title: 'Are you sure?',
+                text: "Please click confirm to approve this post",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                reverseButtons: true,
+                buttonsStyling: false
+            }).then(function() {
+                $("#confirm_approve-"+id).off("submit").submit();
+                swal(
+                    'Approved!',
+                    'Post has been approved.',
+                    'success'
+                );
+            }, function(dismiss) {
+                // dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+                if (dismiss === 'cancel') {
+                    swal(
+                        'Cancelled',
+                        'Post remains pending',
+                        'info'
                     );
                 }
             });
