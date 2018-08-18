@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Notifications\AuthorPostApproved;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
@@ -200,6 +201,8 @@ class PostController extends Controller
         if ($post->is_approved == false) {
             $post->is_approved = true;
             $post->save();
+
+            $post->user->notify(new AuthorPostApproved($post));
         }
 
         flashy()->success('Post Approved Successfully!');
