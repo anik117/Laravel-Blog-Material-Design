@@ -69,13 +69,18 @@
                     <p>
                         Join our newsletter and get news in your inbox every week! We hate spam too, so no worries about this.
                     </p>
-                    <form class="form form-newsletter" method="" action="">
-
+                    <form class="form form-newsletter" method="POST" action="{{ route('subscriber.store') }}">
+                        @csrf
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email...">
+                            <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Your Email..." required>
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
-                        <button type="button" class="btn btn-rose btn-just-icon" name="button">
+                        <button type="submit" class="btn btn-rose btn-just-icon">
                             <i class="material-icons">mail</i>
                         </button>
 

@@ -68,6 +68,12 @@
                         <p>Pending Posts</p>
                     </a>
                 </li>
+                <li class="{{ Request::is('admin/subscriber') ? 'active' : '' }}">
+                    <a href="{{ route('admin.subscriber.index') }}">
+                        <i class="material-icons">list_alt</i>
+                        <p>Subscribers</p>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
                     <a href="{{ route('admin.tag.index') }}">
                         <i class="material-icons">label</i>

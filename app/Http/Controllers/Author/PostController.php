@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Author;
 
 use App\Category;
+use App\Notifications\NewAuthorPost;
 use App\Post;
 use App\Tag;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use MercurySeries\Flashy\Flashy;
@@ -95,6 +98,9 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        $users = User::where('role_id', '1')->get();
+        Notification::send($users, new NewAuthorPost($post));
 
         flashy()->success('Post Created Successfully!');
         return redirect()->route('author.post.index');
