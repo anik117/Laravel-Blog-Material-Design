@@ -30,13 +30,20 @@
                         <div class="col-md-4">
                             <div class="card card-blog">
                                 <div class="card-image">
-                                    <a href="">
-                                        <img class="img" src="{{ Storage::disk('public')->url('post/'.$post->image)}}" alt="{{ $post->title }}">
-                                    </a>
+                                    @if(!($post->image == 'default.png'))
+                                        <a href="">
+                                            <img class="img" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{ $post->title }}">
+                                        </a>
+                                    @else
+                                        <a href="">
+                                            <img class="img" src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="{{ $post->title }}">
+                                        </a>
+                                    @endif
+
                                     <div class="colored-shadow" style="background-image: url({{ Storage::disk('public')->url('post/'.$post->image)}}); opacity: 1;"></div></div>
 
                                 <div class="card-content">
-                                    <h6 class="category text-success">Legal</h6>
+                                    <h6 class="category text-rose"><small>Published on</small> {{ $post->created_at->toFormattedDateString() }}</h6>
 
                                     <h4 class="card-title">
                                         <a href="">{{ $post->title }}</a>
@@ -44,7 +51,7 @@
                                     <div class="footer">
                                         <div class="author">
                                             <a href="#pablo">
-                                                <img src="{{ asset('assets/frontend/img/faces/marc.jpg') }}" alt="" class="avatar img-raised">
+                                                <img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="" class="avatar img-raised">
                                                 <span>{{ $post->user->name }}</span>
                                             </a>
                                         </div>

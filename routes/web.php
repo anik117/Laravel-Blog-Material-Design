@@ -31,6 +31,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('/subscriber', 'SubscriberController@index')->name('subscriber.index');
         Route::delete('/subscriber/{id}', 'SubscriberController@destroy')->name('subscriber.destroy');
 
+        Route::get('/profile/settings', 'ProfileSettingsController@index')->name('profile.settings');
+        Route::put('/profile/update', 'ProfileSettingsController@update')->name('profile.update');
+
     });
 
 //Author Routes
@@ -38,4 +41,7 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 
     function (){
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::resource('post', 'PostController');
+
+        Route::get('/profile/settings', 'ProfileSettingsController@index')->name('profile.settings');
+        Route::put('/profile/update', 'ProfileSettingsController@update')->name('profile.update');
     });

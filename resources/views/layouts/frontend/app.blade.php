@@ -23,6 +23,9 @@
     @stack('css')
 
     <style>
+        .main {
+            background-color: #EEEEEE;
+        }
         .title, .card-title, .info-title, .footer-brand, .footer-big h5, .footer-big h4, .media .media-heading {
             font-family: 'Roboto', sans-serif;
         }

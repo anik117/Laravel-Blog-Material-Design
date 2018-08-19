@@ -15,7 +15,7 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{{ asset('assets/backend/img/faces/avatar.jpg') }}" />
+                <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" />
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -24,26 +24,45 @@
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
-                        <li>
-                            <a href="#">My Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
+                        @if(Request::is('admin*'))
+                            <li>
+                                <a href="#">My Profile</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.profile.settings') }}">Settings</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        @endif
+
+                            @if(Request::is('author*'))
+                                <li>
+                                    <a href="#">My Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('author.profile.settings') }}">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            @endif
                     </ul>
                 </div>
             </div>
