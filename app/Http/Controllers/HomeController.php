@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
+     * Show the application homepage.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home');
+        $categories = Category::all();
+        $posts = Post::latest()->take(6)->get();
+        return view('home', compact('categories', 'posts'));
     }
 }
