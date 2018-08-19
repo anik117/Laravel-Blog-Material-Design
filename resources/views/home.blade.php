@@ -29,29 +29,40 @@
                     @foreach($posts as $post)
                         <div class="col-md-4">
                             <div class="card card-blog">
-                                <div class="card-image">
-                                    @if(!($post->image == 'default.png'))
-                                        <a href="">
-                                            <img class="img" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{ $post->title }}">
-                                        </a>
-                                    @else
-                                        <a href="">
-                                            <img class="img" src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="{{ $post->title }}">
-                                        </a>
-                                    @endif
+                                <div class="card-image" style="overflow:hidden; z-index: initial;">
+                                    <div class="wrapper" style="height: 200px;">
+                                        @if(!($post->image == 'default.png'))
+                                            <a href="">
+                                                <img class="img" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{ $post->title }}">
+                                            </a>
+                                        @else
+                                            <a href="">
+                                                <img class="img" src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="{{ $post->title }}">
+                                            </a>
+                                        @endif
+                                    </div>
 
-                                    <div class="colored-shadow" style="background-image: url({{ Storage::disk('public')->url('post/'.$post->image)}}); opacity: 1;"></div></div>
+                                    <div class="colored-shadow" style="top: -20px; background-image: url({{ Storage::disk('public')->url('post/'.$post->image)}}); opacity: 1;"></div>
+                                </div>
 
                                 <div class="card-content">
                                     <h6 class="category text-rose"><small>Published on</small> {{ $post->created_at->toFormattedDateString() }}</h6>
 
-                                    <h4 class="card-title">
-                                        <a href="">{{ $post->title }}</a>
-                                    </h4>
+                                    <h5 class="card-title">
+                                        <a href="">{{ str_limit($post->title, '30') }}</a>
+                                    </h5>
                                     <div class="footer">
                                         <div class="author">
-                                            <a href="#pablo">
-                                                <img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="" class="avatar img-raised">
+                                            <a href="#">
+                                                @if(!($post->user->image == 'default.png'))
+                                                    <a href="">
+                                                        <img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="{{ $post->user->name }}" class="avatar img-raised">
+                                                    </a>
+                                                @else
+                                                    <a href="">
+                                                        <img src="{{ asset('assets/backend/img/default-avatar.png') }}" alt="{{ $post->user->name }}" class="avatar img-raised">
+                                                    </a>
+                                                @endif
                                                 <span>{{ $post->user->name }}</span>
                                             </a>
                                         </div>
@@ -151,20 +162,20 @@
 
             <div class="container">
                 <div class="row">
-
-                    <div class="col-md-6">
+                    @foreach($admins as $admin)
+                        <div class="col-md-6">
                         <div class="card card-profile card-plain">
                             <div class="col-md-5">
                                 <div class="card-image">
-                                    <a href="#pablo">
-                                        <img class="img" src="{{ asset('assets/frontend/img/faces/card-profile1-square.jpg') }}" />
+                                    <a href="">
+                                        <img src="{{ Storage::disk('public')->url('profile/'.$admin->image) }}" alt="{{ $admin->name }}" class="avatar img-raised">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="card-content">
-                                    <h4 class="card-title">Alec Thompson</h4>
-                                    <h6 class="category text-muted">Author of the Month</h6>
+                                    <h4 class="card-title">{{ $admin->name }}</h4>
+                                    <h6 class="category text-muted">Admin</h6>
 
                                     <p class="card-description">
                                         Don't be scared of the truth because we need to restart the human foundation in truth...
@@ -179,36 +190,37 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="col-md-6">
-                        <div class="card card-profile card-plain">
-                            <div class="col-md-5">
-                                <div class="card-image">
-                                    <a href="#pablo">
-                                        <img class="img" src="{{ asset('assets/frontend/img/faces/card-profile1-square.jpg') }}" />
-                                    </a>
+                    @foreach($authors as $author)
+                        <div class="col-md-6">
+                            <div class="card card-profile card-plain">
+                                <div class="col-md-5">
+                                    <div class="card-image">
+                                        <a href="">
+                                            <img src="{{ Storage::disk('public')->url('profile/'.$author->image) }}" alt="{{ $author->name }}" class="avatar img-raised">
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="card-content">
-                                    <h4 class="card-title">Kendall Andrew</h4>
-                                    <h6 class="category text-muted">Author of the Week</h6>
+                                <div class="col-md-7">
+                                    <div class="card-content">
+                                        <h4 class="card-title">{{ $author->name }}</h4>
+                                        <h6 class="category text-muted">Author</h6>
 
-                                    <p class="card-description">
-                                        Don't be scared of the truth because we need to restart the human foundation in truth...
-                                    </p>
+                                        <p class="card-description">
+                                            Don't be scared of the truth because we need to restart the human foundation in truth...
+                                        </p>
 
-                                    <div class="footer">
-                                        <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-linkedin"></i></a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-facebook-square"></i></a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-dribbble"></i></a>
-                                        <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-google"></i></a>
+                                        <div class="footer">
+                                            <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-twitter"></i></a>
+                                            <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-facebook-square"></i></a>
+                                            <a href="#pablo" class="btn btn-just-icon btn-simple btn-white"><i class="fa fa-google"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endforeach
                 </div>
 
             </div>

@@ -61,15 +61,19 @@
                                         <div class="form-group">
                                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail">
-                                                    <img src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="image upload">
+                                                    @if(isset( Auth::user()->image))
+                                                        <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" alt="Preview">
+                                                    @else
+                                                        <img src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="image upload">
+                                                    @endif
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                                 <div>
-                                    <span class="btn btn-rose btn-round btn-file">
-                                        <span class="fileinput-new">Profile Picture</span>
-                                        <span class="fileinput-exists">Change</span>
-                                        <input type="file" name="image">
-                                    </span>
+                                                    <span class="btn btn-rose btn-round btn-file">
+                                                        <span class="fileinput-new">Profile Picture</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <input type="file" name="image">
+                                                    </span>
                                                     <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                                 </div>
                                             </div>

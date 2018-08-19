@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,6 +18,8 @@ class HomeController extends Controller
     {
         $categories = Category::all();
         $posts = Post::where('is_approved', '1')->latest()->take(6)->get();
-        return view('home', compact('categories', 'posts'));
+        $admins = User::where('id', '1')->get();
+        $authors = User::where('id', '2')->get();
+        return view('home', compact('categories', 'posts', 'admins', 'authors'));
     }
 }

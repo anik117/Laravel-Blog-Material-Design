@@ -59,7 +59,7 @@ class CategoryController extends Controller
                 Storage::disk('public')->makeDirectory('category');
             }
 //            resize image for category
-            $category = Image::make($image)->resize(1600,479)->stream();
+            $category = Image::make($image)->stream();
             Storage::disk('public')->put('category/'.$imagename,$category);
         } else {
             $imagename = 'default.png';
@@ -137,7 +137,7 @@ class CategoryController extends Controller
             }
 
 //            resize image for category
-            $categoryimage = Image::make($image)->resize(1600,479)->stream();
+            $categoryimage = Image::make($image)->stream();
             Storage::disk('public')->put('category/'.$imagename,$categoryimage);
         } else {
             $imagename = $category->image;

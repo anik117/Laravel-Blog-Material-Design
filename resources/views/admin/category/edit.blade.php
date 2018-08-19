@@ -25,7 +25,11 @@
                         <div class="form-group">
                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
-                                    <img src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="image upload">
+                                    @if(isset($category->image))
+                                        <img src="{{ Storage::disk('public')->url('category/'.$category->image) }}" alt="Preview">
+                                    @else
+                                        <img src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="image upload">
+                                    @endif
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div>

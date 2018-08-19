@@ -71,7 +71,7 @@ class PostController extends Controller
             }
 
 //            resize image for category
-            $postimage = Image::make($image)->resize(1600,1066)->stream();
+            $postimage = Image::make($image)->stream();
             Storage::disk('public')->put('post/'.$imagename,$postimage);
 
         } else {
@@ -169,7 +169,7 @@ class PostController extends Controller
             }
 
 //            resize image for category
-            $postimage = Image::make($image)->resize(1600,1066)->stream();
+            $postimage = Image::make($image)->stream();
             Storage::disk('public')->put('post/'.$imagename,$postimage);
 
         } else {
