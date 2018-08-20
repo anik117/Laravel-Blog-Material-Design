@@ -3,6 +3,12 @@
 @section('title', 'Home')
 
 @push('css')
+    <style>
+        .card .card-image .wrapper img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -29,7 +35,7 @@
                     @foreach($posts as $post)
                         <div class="col-md-4">
                             <div class="card card-blog">
-                                <div class="card-image" style="overflow:hidden; z-index: initial;">
+                                <div class="card-image">
                                     <div class="wrapper" style="height: 200px;">
                                         @if(!($post->image == 'default.png'))
                                             <a href="">
@@ -42,7 +48,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="colored-shadow" style="top: -20px; background-image: url({{ Storage::disk('public')->url('post/'.$post->image)}}); opacity: 1;"></div>
+                                    <div class="colored-shadow" style="background-image: url({{ Storage::disk('public')->url('post/'.$post->image)}}); opacity: 1;"></div>
                                 </div>
 
                                 <div class="card-content">
