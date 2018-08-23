@@ -31,13 +31,26 @@
 
                             <div class="input-group">
 									<span class="input-group-addon">
-										<i class="material-icons">face</i>
+										<i class="material-icons">tag_faces</i>
 									</span>
 
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Name" required autofocus>
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="input-group">
+									<span class="input-group-addon">
+										<i class="material-icons">face</i>
+									</span>
+
+                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="User Name" required autofocus>
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                 @endif
                             </div>

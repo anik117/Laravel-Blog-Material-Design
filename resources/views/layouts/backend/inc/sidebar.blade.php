@@ -17,7 +17,11 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" />
+                @if(!isset($user->image))
+                    <img src="{{ Storage::disk('public')->url('default.png') }}" />
+                @else
+                    <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" />
+                @endif
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
