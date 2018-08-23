@@ -20,4 +20,9 @@ class Post extends Model
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
+
+    public function favoriteToUsers()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
 }

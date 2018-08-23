@@ -17,7 +17,7 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                @if(!isset($user->image))
+                @if(Auth::user()->image == 'default.png')
                     <img src="{{ Storage::disk('public')->url('default.png') }}" />
                 @else
                     <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" />

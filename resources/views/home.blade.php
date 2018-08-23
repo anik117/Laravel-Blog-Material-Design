@@ -12,6 +12,18 @@
         .h-100 {
             height: 100% !important;
         }
+
+        a .material-icons {
+             vertical-align: top;
+        }
+
+        .card .footer .stats a {
+            color: #999;
+        }
+
+        .favorite {
+            color: #e91e63 !important;
+        }
     </style>
 @endpush
 
@@ -77,9 +89,21 @@
                                             </a>
                                         </div>
                                         <div class="stats">
-                                            <i class="material-icons">favorite</i> 30 ·
-                                            <i class="material-icons">visibility</i> 100 ·
-                                            <i class="material-icons">chat_bubble</i> 45
+                                            @guest()
+                                                <a href="javascript:void(0)" onclick="alert('Need to login first!')">
+                                                    <i class="material-icons">favorite</i> {{ $post->favoriteToUsers->count() }} ·
+                                                </a>
+                                            @else
+                                                <a class="{{ !Auth::user()->favoritePosts()->where('post_id', $post->id)->count() == 0 ? 'favorite' : ''}}" href="javascript:void(0)" onclick="document.getElementById('favorite-form-{{ $post->id }}').submit();">
+                                                    <i class="material-icons">favorite</i> {{ $post->favoriteToUsers->count() }} ·
+                                                </a>
+
+                                                <form id="favorite-form-{{ $post->id }}" action="{{ route('post.favorite', $post->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            @endguest
+                                            <i class="material-icons">visibility</i> {{ $post->view_count }} ·
+                                            <a href="javascript:void(0)"><i class="material-icons">chat_bubble</i> 10 </a>
                                         </div>
                                     </div>
                                 </div>
@@ -241,5 +265,10 @@
 @endsection
 
 @push('js')
+    <script type="text/javascript">
+        // function loginAlert() {
+        //
+        // }
+    </script>
 @endpush
 

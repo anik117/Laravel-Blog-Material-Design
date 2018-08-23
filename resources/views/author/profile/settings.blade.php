@@ -61,10 +61,10 @@
                                         <div class="form-group">
                                             <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail">
-                                                    @if(isset( Auth::user()->image))
-                                                        <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" alt="Preview">
+                                                    @if(Auth::user()->image == 'default.png')
+                                                        <img src="{{ Storage::disk('public')->url('default.png') }}" />
                                                     @else
-                                                        <img src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="image upload">
+                                                        <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}" />
                                                     @endif
                                                 </div>
                                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
