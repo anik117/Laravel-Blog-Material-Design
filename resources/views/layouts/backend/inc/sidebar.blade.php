@@ -1,4 +1,6 @@
-<div class="sidebar" data-active-color="rose" data-background-color="black" data-image="{{ asset('assets/backend/img/sidebar-1.jpg') }}">
+<div class="sidebar" data-active-color="rose" data-background-color="white">
+
+    {{--data-image="{{ asset('assets/backend/img/sidebar-1.jpg') }}"--}}
 
     <div class="logo">
         <a href="{{ route('home') }}" class="simple-text">

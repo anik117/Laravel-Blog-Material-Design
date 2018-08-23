@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -61,6 +62,33 @@ class ProfileSettingsController extends Controller
 
         flashy()->success('Profile updated successfully');
         return redirect()->back();
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $this->validate($request, [
+            'old_password' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $hashedPassword = Auth::user()->password;
+
+        if (Hash::check($request->old_password, $hashedPassword)) {
+            if (!Hash::check($request->password, $hashedPassword)) {
+                $user = User::find(Auth::id());
+                $user->password = Hash::make($request->password);
+                $user->save();
+                flashy()->success('Password has been changed successfully!');
+                Auth::logout();
+                return redirect()->back();
+            } else {
+                flashy()->error('New Password cannot be the same as old password!');
+                return redirect()->back();
+            }
+        } else {
+            flashy()->error('Current password did not match!');
+            return redirect()->back();
+        }
     }
 }
 

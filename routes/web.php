@@ -33,6 +33,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 
         Route::get('/profile/settings', 'ProfileSettingsController@index')->name('profile.settings');
         Route::put('/profile/update', 'ProfileSettingsController@update')->name('profile.update');
+        Route::put('/password/update', 'ProfileSettingsController@updatePassword')->name('password.update');
 
     });
 
@@ -44,4 +45,5 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 
 
         Route::get('/profile/settings', 'ProfileSettingsController@index')->name('profile.settings');
         Route::put('/profile/update', 'ProfileSettingsController@update')->name('profile.update');
+        Route::put('/password/update', 'ProfileSettingsController@updatePassword')->name('password.update');
     });

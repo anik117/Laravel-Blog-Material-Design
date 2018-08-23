@@ -86,9 +86,42 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="pill2">
-                            Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                            <br>
-                            <br>Dynamically innovate resource-leveling customer service for state of the art customer service.
+                            <form method="POST" action="{{ route('author.password.update') }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Enter your old password.." required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" name="password" placeholder="Enter your new password.." required>
+
+                                            @if ($errors->has('password'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm new password.." required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-rose pull-left">Change Password</button>
+                                <div class="clearfix"></div>
+                            </form>
                         </div>
                     </div>
                 </div>

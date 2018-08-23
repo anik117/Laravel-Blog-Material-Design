@@ -8,6 +8,10 @@
             height: 200px;
             object-fit: cover;
         }
+
+        .h-100 {
+            height: 100% !important;
+        }
     </style>
 @endpush
 
@@ -34,7 +38,7 @@
 
                     @foreach($posts as $post)
                         <div class="col-md-4">
-                            <div class="card card-blog">
+                            <div class="card card-blog h-100">
                                 <div class="card-image">
                                     <div class="wrapper" style="height: 200px;">
                                         @if(!($post->image == 'default.png'))
