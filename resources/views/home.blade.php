@@ -54,11 +54,11 @@
                                 <div class="card-image">
                                     <div class="wrapper" style="height: 200px;">
                                         @if(!($post->image == 'default.png'))
-                                            <a href="">
+                                            <a href="{{ route('post.details', $post->slug) }}">
                                                 <img class="img" src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{ $post->title }}">
                                             </a>
                                         @else
-                                            <a href="">
+                                            <a href="{{ route('post.details', $post->slug) }}">
                                                 <img class="img" src="{{ asset('assets/backend/img/image_placeholder.jpg') }}" alt="{{ $post->title }}">
                                             </a>
                                         @endif
@@ -71,7 +71,7 @@
                                     <h6 class="category text-rose"><small>Published on</small> {{ $post->created_at->toFormattedDateString() }}</h6>
 
                                     <h5 class="card-title">
-                                        <a href="">{{ str_limit($post->title, '30') }}</a>
+                                        <a href="{{ route('post.details', $post->slug) }}">{{ str_limit($post->title, '30') }}</a>
                                     </h5>
                                     <div class="footer">
                                         <div class="author">
