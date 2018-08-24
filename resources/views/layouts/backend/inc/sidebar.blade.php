@@ -93,6 +93,12 @@
                         <p>Pending Posts</p>
                     </a>
                 </li>
+                <li class="{{ Request::is('admin/favorite') ? 'active' : '' }}">
+                    <a href="{{ route('admin.post.favorite') }}">
+                        <i class="material-icons">favorite</i>
+                        <p>Favorite Posts</p>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
                     <a href="{{ route('admin.tag.index') }}">
                         <i class="material-icons">label</i>
@@ -125,6 +131,12 @@
                     <a href="{{ route('author.post.index') }}">
                         <i class="material-icons">library_books</i>
                         <p>Posts</p>
+                    </a>
+                </li>
+                <li class="{{ Request::is('author/favorite') ? 'active' : '' }}">
+                    <a href="{{ route('author.post.favorite') }}">
+                        <i class="material-icons">favorite</i>
+                        <p>Favorite Posts</p>
                     </a>
                 </li>
             @endif

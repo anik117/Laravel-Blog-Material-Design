@@ -81,8 +81,8 @@
                                                         <img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="{{ $post->user->name }}" class="avatar img-raised">
                                                     </a>
                                                 @else
-                                                    <a href="">
-                                                        <img src="{{ asset('assets/backend/img/default-avatar.png') }}" alt="{{ $post->user->name }}" class="avatar img-raised">
+                                                    <a href="#">
+                                                        <img src="{{ Storage::disk('public')->url('default.png') }}" alt="{{ $post->user->name }}" class="avatar img-raised">
                                                     </a>
                                                 @endif
                                                 <span>{{ $post->user->name }}</span>
