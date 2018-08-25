@@ -199,9 +199,9 @@
                         </div>
                         <h3 class="title text-center">Post your comment</h3>
                         <div class="media media-post">
-                            <a class="pull-left author" href="#pablo">
+                            <a class="pull-left author" href="#">
                                 <div class="avatar">
-                                    <img class="media-object" alt="64x64" src="../assets/img/faces/card-profile6-square.jpg">
+                                    {{-- <img class="media-object" alt="64x64" src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}"> --}}
                                 </div>
                             </a>
                             <div class="media-body">

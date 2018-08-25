@@ -14,5 +14,12 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
-mix.browserSync('blog.run');
+// mix.browserSync('blog.run');
+
+mix.browserSync({
+    open: 'external',
+    host: 'blog.run',
+    proxy: 'http://blog.run',
+});
+
 mix.disableNotifications();

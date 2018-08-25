@@ -3,7 +3,11 @@
 @section('title', 'Posts')
 
 @push('css')
-
+    <style>
+        .dt-buttons {
+            display: inline-block;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -90,6 +94,11 @@
 @endsection
 
 @push('js')
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -103,14 +112,40 @@
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Search records",
-                }
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        }
+                    },
 
+                    {
+                        extend: 'csvHtml5',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        }
+                    },
+
+                    {
+                        extend: 'pdfHtml5',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: 'th:not(:last-child)'
+                        }
+                    }
+                ]
             });
 
             $('.card .material-datatables label').addClass('form-group');
+            $('.card .material-datatables button').addClass('btn btn-primary');
+            $('.card .material-datatables .dataTables_filter').addClass('pull-right');
 
         });
-
     </script>
 
     <script type="text/javascript">
